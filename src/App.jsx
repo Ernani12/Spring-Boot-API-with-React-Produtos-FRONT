@@ -15,8 +15,21 @@ function App() {
   //obter dados do formulario EVENTOS
   const aoDigitar=(e)=> {
     setObjProduto({...objProduto, [e.target.name]:e.target.value})
+  }
 
-
+  //cadastrar produto
+  const cadastrar = () => {
+    fetch("http://localhost:8081/cadastrar", {
+      method:'post',
+      body:JSON.stringify(objProduto),
+      headers:{
+        'Content-type':'application/json',
+        'Accept':'application/json',
+      }
+    })
+    .then(retorno => retorno.json())
+    .then(retorno_convertido => 
+      console.log(retorno_convertido))
   }
 
   const [btncadastrar, setbtnCadastrar] = useState(true);
@@ -36,8 +49,8 @@ function App() {
   return (
     <>
       <div>
-       <p>{JSON.stringify(objProduto)  }</p>
-      <Formulario  botao={btncadastrar} eventoTeclado={aoDigitar}/>
+       {/*<p>{JSON.stringify(objProduto)  }</p>*/}
+      <Formulario  botao={btncadastrar} eventoTeclado={aoDigitar} cadastrar={cadastrar} />
       <Tabela vetor={produtos}/>
       
       </div>

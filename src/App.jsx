@@ -11,7 +11,13 @@ function App() {
     nome : '',
     marca: ''
   }
- 
+
+  //obter dados do formulario EVENTOS
+  const aoDigitar=(e)=> {
+    setObjProduto({...objProduto, [e.target.name]:e.target.value})
+
+
+  }
 
   const [btncadastrar, setbtnCadastrar] = useState(true);
 
@@ -31,7 +37,7 @@ function App() {
     <>
       <div>
        <p>{JSON.stringify(objProduto)  }</p>
-      <Formulario  botao={btncadastrar} />
+      <Formulario  botao={btncadastrar} eventoTeclado={aoDigitar}/>
       <Tabela vetor={produtos}/>
       
       </div>

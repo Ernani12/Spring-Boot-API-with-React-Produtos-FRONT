@@ -1,4 +1,4 @@
-function Formulario ({botao,eventoTeclado}){
+function Formulario ({botao,eventoTeclado, cadastrar}){
     return (
         
         <form>
@@ -8,7 +8,7 @@ function Formulario ({botao,eventoTeclado}){
             {
                 botao
                 ?
-                <input type="button" value="Cadastrar" className="btn-primary"></input>
+                <input type="button" onClick={cadastrar} value="Cadastrar" className="btn-primary"></input>
                 :
                 <div>
                     <input type="button" value="Alterar"className="btn-warning"></input>

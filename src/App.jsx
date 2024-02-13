@@ -37,8 +37,14 @@ function App() {
           // pega todos os produtos e adiciona na api
           setProdutos([...produtos, retorno_convertido]);
           alert('Produto cadastrado com sucesso');
+          LimparFormulario();
         }
     })
+  }
+
+  // limpar formulario
+  const LimparFormulario =() =>{
+      setObjProduto(produto); // modelos sempre limpo do "produto"
   }
 
   const [btncadastrar, setbtnCadastrar] = useState(true);
@@ -59,12 +65,18 @@ function App() {
     <>
       <div>
        {/*<p>{JSON.stringify(objProduto)  }</p>*/}
-      <Formulario  botao={btncadastrar} eventoTeclado={aoDigitar} cadastrar={cadastrar} />
+      <Formulario  botao={btncadastrar} eventoTeclado={aoDigitar} cadastrar={cadastrar} objLimpar={objProduto}/>
       <Tabela vetor={produtos}/>
       
       </div>
     </>
   )
 }
+
+
+
+
+
+
 
 export default App

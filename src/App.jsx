@@ -28,8 +28,17 @@ function App() {
       }
     })
     .then(retorno => retorno.json())
-    .then(retorno_convertido => 
-      console.log(retorno_convertido))
+    .then(retorno_convertido => {
+
+      //ataulizar lista para novo produto
+        if(retorno_convertido.mensagem !== undefined){
+          alert(retorno_convertido.mensagem);
+        }else{
+          // pega todos os produtos e adiciona na api
+          setProdutos([...produtos, retorno_convertido]);
+          alert('Produto cadastrado com sucesso');
+        }
+    })
   }
 
   const [btncadastrar, setbtnCadastrar] = useState(true);

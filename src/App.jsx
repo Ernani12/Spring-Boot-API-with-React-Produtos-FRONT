@@ -41,6 +41,11 @@ function App() {
         }
     })
   }
+  //selecionar produto
+  const SelecionarP = (indice) => {
+      setObjProduto(produtos[indice]);
+      setbtnCadastrar(false);// quero alterar ativo outros botoes
+  }
 
   // limpar formulario
   const LimparFormulario =() =>{
@@ -66,7 +71,7 @@ function App() {
       <div>
        {/*<p>{JSON.stringify(objProduto)  }</p>*/}
       <Formulario  botao={btncadastrar} eventoTeclado={aoDigitar} cadastrar={cadastrar} objLimpar={objProduto}/>
-      <Tabela vetor={produtos}/>
+      <Tabela vetor={produtos} selecionar={SelecionarP}/>
       
       </div>
     </>

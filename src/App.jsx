@@ -50,6 +50,7 @@ function App() {
   // limpar formulario
   const LimparFormulario =() =>{
       setObjProduto(produto); // modelos sempre limpo do "produto"
+      setbtnCadastrar(true);
   }
 
   const [btncadastrar, setbtnCadastrar] = useState(true);
@@ -70,7 +71,7 @@ function App() {
     <>
       <div>
        {/*<p>{JSON.stringify(objProduto)  }</p>*/}
-      <Formulario  botao={btncadastrar} eventoTeclado={aoDigitar} cadastrar={cadastrar} objLimpar={objProduto}/>
+      <Formulario cancelar={LimparFormulario} botao={btncadastrar} eventoTeclado={aoDigitar} cadastrar={cadastrar} objLimpar={objProduto}/>
       <Tabela vetor={produtos} selecionar={SelecionarP}/>
       
       </div>

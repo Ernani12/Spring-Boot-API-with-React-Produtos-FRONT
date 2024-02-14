@@ -19,7 +19,7 @@ function App() {
 
   //cadastrar produto
   const cadastrar = () => {
-    fetch("http://localhost:8081/cadastrar", {
+    fetch('http://localhost:8081/cadastrar', {
       method:'post',
       body:JSON.stringify(objProduto),
       headers:{
@@ -41,6 +41,42 @@ function App() {
         }
     })
   }
+
+  // remover prodtuo
+  const Remover = () => {
+    fetch('http://localhost:8081/remover/'+objProduto.codigo, {
+      method:'delete',
+      headers:{
+        'Content-type':'application/json',
+        'Accept':'application/json',
+      }
+    })
+    .then(retorno => retorno.json())
+    .then(retorno_convertido => {
+
+      // removido com suceeo nao posso remover direto vetor
+      alert('Removido com suceeso');
+
+        let vetTemp=[...produtos]
+        // indice qual remover?
+        let indice = vetTemp.findIndex((p)=>{
+          return p.codigo === objProduto.codigo;
+          // acha qual quero remover por parametro
+        })
+        // vou remover agora do temporario apenas 1 
+        vetTemp.splice(indice,1);
+
+        // altera o vetor original (atualizar)
+        setProdutos(vetTemp);
+
+        //limpar campos
+        LimparFormulario();
+
+    })
+  }
+
+
+
   //selecionar produto
   const SelecionarP = (indice) => {
       setObjProduto(produtos[indice]);
@@ -71,7 +107,7 @@ function App() {
     <>
       <div>
        {/*<p>{JSON.stringify(objProduto)  }</p>*/}
-      <Formulario cancelar={LimparFormulario} botao={btncadastrar} eventoTeclado={aoDigitar} cadastrar={cadastrar} objLimpar={objProduto}/>
+      <Formulario remover={Remover} cancelar={LimparFormulario} botao={btncadastrar} eventoTeclado={aoDigitar} cadastrar={cadastrar} objLimpar={objProduto}/>
       <Tabela vetor={produtos} selecionar={SelecionarP}/>
       
       </div>

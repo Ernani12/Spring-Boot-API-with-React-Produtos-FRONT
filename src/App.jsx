@@ -3,6 +3,8 @@ import './App.css'
 import Formulario from './formulario'
 import Tabela from './tabela'
 
+
+
 function App() {
 
   //objeto produto como se fosse classe
@@ -41,6 +43,47 @@ function App() {
         }
     })
   }
+    // alterar
+    //cadastrar produto
+  const Alterar = () => {
+    fetch('http://localhost:8081/alterar', {
+      method:'put',
+      body:JSON.stringify(objProduto),
+      headers:{
+        'Content-type':'application/json',
+        'Accept':'application/json',
+      }
+    })
+    .then(retorno => retorno.json())
+    .then(retorno_convertido => {
+
+      //ataulizar lista para novo produto
+        if(retorno_convertido.mensagem !== undefined){
+          alert(retorno_convertido.mensagem);
+        }else{
+          // pega todos os produtos e adiciona na api
+          
+          
+          let vetTemp=[...produtos]///copia vetor de produtos
+          // indice qual remover?
+          let indice = vetTemp.findIndex((p)=>{
+            return p.codigo === objProduto.codigo;
+            // acha qual quero remover por parametro
+          })
+          // vou Alterar passo objeti vindo
+          vetTemp[indice] = objProduto;
+  
+          // altera o vetor original (atualizar), "cadastra novo"
+          setProdutos(vetTemp);
+
+          alert('Produto Atualizado');
+
+          LimparFormulario();
+        }
+    })
+  }
+
+
 
   // remover prodtuo
   const Remover = () => {
@@ -107,7 +150,7 @@ function App() {
     <>
       <div>
        {/*<p>{JSON.stringify(objProduto)  }</p>*/}
-      <Formulario remover={Remover} cancelar={LimparFormulario} botao={btncadastrar} eventoTeclado={aoDigitar} cadastrar={cadastrar} objLimpar={objProduto}/>
+      <Formulario alterar={Alterar} remover={Remover} cancelar={LimparFormulario} botao={btncadastrar} eventoTeclado={aoDigitar} cadastrar={cadastrar} objLimpar={objProduto}/>
       <Tabela vetor={produtos} selecionar={SelecionarP}/>
       
       </div>
